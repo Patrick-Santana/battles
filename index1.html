@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="module">
+     import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.esm.browser.js'
+    </script>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+
+
+<div id="wrapper">
+  <div class="player you">
+    <h1 id="titulo">YOU</h1>
+    <div class="health">
+      <div class="bar" :style="{width: health_me < 0 ? 0 : health_me + '%'}"></div>
+      {{ health_me }} / 100
+    </div>
+  </div>
+  <div class="player enemy">
+    <h1>MONSTER</h1>
+    <div class="health">
+      <div class="bar" :style="{width: health_enemy < 0 ? 0 : health_enemy + '%'}"></div>
+      {{ health_enemy }} / 100
+    </div>
+  </div>
+  <div class="row">
+    <button class="start-over" v-if="!playing" @click="playing = !playing">START NEW GAME</button>
+    <div class="game-buttons" v-if="playing">
+      <button @click="attack(10)">Attack</button>
+      <button @click="attack(15)">Special Attack</button>
+      <button @click="heal">Heal</button>
+      <button @click="flee">Flee</button>
+    </div>
+  </div>
+  <div class="row">
+  <ul class="status">
+    <li v-for="update in updates"
+        :class="update.actor">
+      {{ capitalize(update.actor) }} {{ update.message }} {{ update.dmg }}HP
+    </li>
+  </ul>
+
+  <script src="script.js"></script>
+</div>
+</div>
+
+</body>
+</html>
